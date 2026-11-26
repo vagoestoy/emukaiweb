@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>emukai</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+  body{background:#000;color:#fff}
+  header{position:sticky;top:0;z-index:5;background:#651bb0;display:flex;justify-content:space-between;align-items:center;padding:8px 16px}
+  .logo{display:flex;align-items:center;gap:6px;font-weight:900;font-size:28px;line-height:1}
+  .logo svg{height:26.44px;width:45.8px;display:block}
+  .menu-btn{background:none;border:none;color:#fff;font-size:28px;cursor:pointer}
+  main{padding:20px 16px 40px;max-width:600px;margin:0 auto}
+  .texto1{background:transparent;color:#fff;padding:16px 4px;border-radius:10px;font-size:15px;line-height:1.5;margin-bottom:16px}
+  .texto2{background:#fff;color:#000;padding:16px;border-radius:10px;font-size:15px;line-height:1.5;text-align:center;margin-bottom:20px}
+  .btn{display:block;width:100%;text-align:center;text-decoration:none;padding:14px;border-radius:10px;font-weight:800;margin-bottom:12px;color:#000}
+  .btn-web{background:#38bdf8}
+  .btn-apk{background:#5eead4}
+  .btn-morado{background:#7a1fa2;color:#fff}
+  h2{margin:22px 0 12px;font-size:22px}
+  .juegos{background:#fff;color:#000;padding:16px;border-radius:10px}
+  .juegos p{margin-bottom:12px}
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);justify-content:center;align-items:center;padding:20px;z-index:10}
+  .modal.open{display:flex}
+  .modal-box{background:#000;width:100%;max-width:420px;border-radius:12px;overflow:hidden;border:1px solid #333;max-height:90vh;overflow-y:auto}
+  .modal-head{background:#7a1fa2;padding:14px;text-align:center;font-weight:900;font-size:18px}
+  .modal-body{padding:16px}
+  .btn-rojo{background:#e11d2e;color:#fff;border:none;width:100%;padding:14px;border-radius:10px;font-weight:900;cursor:pointer;font-size:16px;margin-bottom:12px}
+  .creado{background:#fff;color:#000;text-align:center;padding:12px;border-radius:10px;font-weight:800;margin-bottom:12px}
+  .btn-link{display:flex;justify-content:space-between;align-items:center;background:#7a1fa2;color:#fff;text-decoration:none;padding:14px;border-radius:10px;font-weight:800;margin-bottom:10px}
+  .btn-link-btn{display:flex;justify-content:space-between;align-items:center;background:#7a1fa2;color:#fff;border:none;width:100%;padding:14px;border-radius:10px;font-weight:800;margin-bottom:10px;cursor:pointer;font-size:16px;text-align:left}
+  .cerrar{background:#333;color:#fff;border:none;width:100%;padding:12px;border-radius:10px;cursor:pointer;margin-top:6px}
+  .error-item{background:#fff;color:#000;padding:12px;border-radius:10px;margin-bottom:12px}
+  .error-item b{display:block;margin-bottom:4px}
+  .error-item p{font-size:14px;line-height:1.5}
+  .modal-rojo .modal-box{background:#e11d2e}
+  .modal-rojo .modal-head{background:#b00f1f}
+  .modal-rojo .modal-body{background:#e11d2e;color:#fff;line-height:1.6;font-size:15px}
+  .modal-rojo .cerrar{background:#000}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">emu
+    <svg viewBox="0 0 810 468" role="img" aria-label="kai">
+      <g fill="none" stroke="#fff" stroke-width="84" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M95 95V372"/>
+        <path d="M205 208L318 372"/>
+        <path d="M713 207V372"/>
+        <circle cx="512" cy="290" r="90" stroke-width="72"/>
+        <path d="M606 215V372"/>
+      </g>
+      <circle cx="292" cy="105" r="57" fill="#fff"/>
+    </svg>
+  </div>
+  <button class="menu-btn" onclick="abrirModal('modal-acerca')">☰</button>
+</header>
+
+<main>
+  <div class="texto1">
+    emukai es un emulador de juegos del sistema operativo de kaiOS para dispositivos móviles. Pensado para aquellos que no tienen un dispositivo con kaios.
+  </div>
+  <div class="texto2">
+    el proyecto apenas esta en sus primeras etapas. todavia no hay disponible Versión app/apk
+  </div>
+  <a class="btn btn-web" href="https://vagoestoy.github.io/emukai/">versión web</a>
+  <a class="btn btn-apk" href="insertar-apklink">descarga apk</a>
+
+  <h2>juegos</h2>
+  <div class="juegos">
+    <p>recopilación de juegos para emular, descarga el 4.7zip.</p>
+    <a class="btn btn-morado" href="https://archive.org/download/kaios-app-collection-4.7z/kaios-app-collection-4.7z">descarga ahora</a>
+  </div>
+
+  <h2>Juegos mod mios</h2>
+  <div class="juegos">
+    <p>estas son copias de juegos pero con retoques. Pueden tener todo desbloqueado o tener algunas funciones extra</p>
+    <a class="btn btn-morado" href="https://www.mediafire.com/file/v2cd82t3bk6jjwi/juegos+mod+vagoestoy.zip/file">mediafire</a>
+  </div>
+</main>
+
+<!-- ACERCA DE EMUKAI -->
+<div id="modal-acerca" class="modal" onclick="if(event.target===this) cerrarModal('modal-acerca')">
+  <div class="modal-box">
+    <div class="modal-head">acerca de emukai</div>
+    <div class="modal-body">
+      <button class="btn-rojo" onclick="abrirModal('modal-aviso')">aviso para el usuario</button>
+      <div class="creado">creado por vagoestoy</div>
+      <button class="btn-link-btn" onclick="cerrarModal('modal-acerca'); abrirModal('modal-errores')">lista de errores <span>&gt;</span></button>
+      <a class="btn-link" href="https://youtube.com/@vagoestoy?si=QIUg7n4OJMmy6FnM">youtube <span>&gt;</span></a>
+      <button class="cerrar" onclick="cerrarModal('modal-acerca')">cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- AVISO -->
+<div id="modal-aviso" class="modal modal-rojo" onclick="if(event.target===this) cerrarModal('modal-aviso')">
+  <div class="modal-box">
+    <div class="modal-head">AVISO PARA EL USUARIO</div>
+    <div class="modal-body">
+      <p>Hola, es de nuestro agrado que te interese emukai</p><br>
+      <p>Si pasas por una mala experiencia o quieras sugerir algo. No dudes en hacer saberlo</p><br>
+      <p>Graba un video donde muestres el fallo, di que afecta. Subelo a YouTube o instagram etiquetando @vagoestoy</p><br>
+      <p>Si es una sugerencia mandala por dm a instagram @vagoestoy</p><br>
+      <p>Gracias por tu preferencia</p>
+      <button class="cerrar" onclick="cerrarModal('modal-aviso')">entendido</button>
+    </div>
+  </div>
+</div>
+
+<!-- LISTA DE ERRORES -->
+<div id="modal-errores" class="modal" onclick="if(event.target===this) cerrarModal('modal-errores')">
+  <div class="modal-box">
+    <div class="modal-head">lista de errores y soluciones</div>
+    <div class="modal-body">
+      <div class="error-item">
+        <b>1. JSZip no cargó, prende internet 1 vez</b>
+        <p>Solución: prende el internet una vez para que cargue JSZip, luego ya puedes usar emukai sin internet. Si sigue fallando, recarga la página.</p>
+      </div>
+      <div class="error-item">
+        <b>2. WiFi OFF</b>
+        <p>Solución: el juego intentó conectarse a internet pero tienes el WiFi apagado en Opciones. Préndelo si el juego lo necesita, o déjalo apagado si quieres jugar sin anuncios.</p>
+      </div>
+      <div class="error-item">
+        <b>3. ERROR al importar el ZIP</b>
+        <p>Solución: el ZIP está dañado o no es un juego de KaiOS. Vuelve a descargar el ZIP completo y vuelve a importarlo. No importes carpetas sueltas.</p>
+      </div>
+      <div class="error-item">
+        <b>4. Promesa rechazada</b>
+        <p>Solución: hubo un fallo al cargar un archivo del juego. Recarga la página, vuelve a importar el juego y revisa el Log en 📋 Log.</p>
+      </div>
+      <div class="error-item">
+        <b>5. Entra a un juego primero</b>
+        <p>Solución: sale cuando le das a Guardar sin estar dentro de un juego. Entra al juego primero y luego dale a 💾 Guardar.</p>
+      </div>
+      <div class="error-item">
+        <b>6. Falta buscar ZIP</b>
+        <p>Solución: el juego está en la lista pero falta su archivo. Dale a Jugar y busca el ZIP de ese juego en tu celular para vincularlo.</p>
+      </div>
+      <div class="error-item">
+        <b>7. El juego no guarda</b>
+        <p>Solución: revisa que tengas activado el autoguardado en ⚙️ Opciones. Si el juego no soporta guardado, usa Exportar guardados desde el menú.</p>
+      </div>
+      <button class="cerrar" onclick="cerrarModal('modal-errores')">cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function abrirModal(id){ document.getElementById(id).classList.add('open'); }
+  function cerrarModal(id){ document.getElementById(id).classList.remove('open'); }
+</script>
+
+</body>
+</html>
